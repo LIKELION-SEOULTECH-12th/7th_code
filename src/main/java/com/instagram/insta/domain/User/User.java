@@ -1,8 +1,11 @@
 package com.instagram.insta.domain.User;
 
+import com.instagram.insta.domain.Post.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -10,17 +13,18 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false)
-    private String Name;
+    private String name;
 
-    @Column(length = 20, nullable = false)
-    private String Nickname;
-
-    @Column(nullable = false)
-    private String Email;
+    @Column(length = 20, nullable = false, unique = true)
+    private String nickname;
 
     @Column(nullable = false)
-    private String Password;
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
 }
