@@ -1,5 +1,8 @@
 package com.instagram.insta.dto.user.response;
 
+
+import com.instagram.insta.domain.User.User;
+
 public class UserResponse {
     private long id;
     private String name;
@@ -12,6 +15,8 @@ public class UserResponse {
         this.nickname = nickname;
         this.email = email;
     }
+
+
 
     public long getId() {
         return id;

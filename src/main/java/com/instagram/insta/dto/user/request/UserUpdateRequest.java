@@ -1,7 +1,7 @@
 package com.instagram.insta.dto.user.request;
 
 public class UserUpdateRequest {
-    private String id;
+    private long id;
     private String name;
     private String nickname;
     private String email;
