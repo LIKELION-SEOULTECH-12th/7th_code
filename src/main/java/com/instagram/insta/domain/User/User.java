@@ -1,7 +1,11 @@
 package com.instagram.insta.domain.User;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 public class User {
     @Id
@@ -12,12 +16,11 @@ public class User {
     private String Name;
 
     @Column(length = 20, nullable = false)
-    private String NickName;
+    private String Nickname;
 
     @Column(nullable = false)
     private String Email;
 
     @Column(nullable = false)
     private String Password;
-
 }
