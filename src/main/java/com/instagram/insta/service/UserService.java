@@ -55,7 +55,7 @@ public class UserService {
 
     @Transactional
     public void updateUser(UserUpdateRequest userUpdateRequest) {
-        Optional<User> optionalUser = userRepository.findById(userUpdateRequest.getId());
+        Optional<User> optionalUser = userRepository.findByEmail(userUpdateRequest.getEmail());
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.setName(userUpdateRequest.getName());

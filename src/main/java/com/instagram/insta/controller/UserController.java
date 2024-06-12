@@ -21,7 +21,10 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public void saveUser(@RequestBody UserCreateRequest userCreateRequest){}
+    public void saveUser(@RequestBody UserCreateRequest userCreateRequest){
+        System.out.println("Received UserCreateRequest: " + userCreateRequest);
+        userService.saveUser(userCreateRequest);
+    }
 
     @GetMapping("/login")
     public String login(){
