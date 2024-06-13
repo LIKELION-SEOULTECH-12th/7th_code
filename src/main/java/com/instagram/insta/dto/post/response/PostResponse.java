@@ -1,34 +1,20 @@
 package com.instagram.insta.dto.post.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class PostResponse {
     private long id;
     private byte[] image;
     private String context;
     private LocalDateTime uploadTime;
-
-    public PostResponse(Long id, byte[] image, String context, LocalDateTime uploadTime) {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public String getContext() {
-        return context;
-    }
-
-    public LocalDateTime getUploadTime() {
-        return uploadTime;
-    }
+    private Long userId;
 }

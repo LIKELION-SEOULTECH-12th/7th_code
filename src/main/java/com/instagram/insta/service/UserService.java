@@ -6,24 +6,18 @@ import com.instagram.insta.dto.user.request.LoginRequest;
 import com.instagram.insta.dto.user.request.UserCreateRequest;
 import com.instagram.insta.dto.user.request.UserUpdateRequest;
 import com.instagram.insta.dto.user.response.UserResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Transactional
     public void saveUser(UserCreateRequest userCreateRequest) {
@@ -36,9 +30,14 @@ public class UserService {
     }
 
     @Transactional
-    public boolean logIn(LoginRequest loginRequest) {
+    public UserResponse logIn(LoginRequest loginRequest) {
         Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
-        return user.isPresent() && user.get().getPassword().equals(loginRequest.getPassword());
+//        return user.isPresent() && user.get().getPassword().equals(loginRequest.getPassword());
+        if(user.isPresent() && user.get().getPassword().equals(loginRequest.getPassword())){
+            User loggedInUser = user.get();
+            return new UserResponse(loggedInUser.getId(), loggedInUser.getName(), loggedInUser.getNickname(), loggedInUser.getEmail());
+        }
+        return null;
     }
 
     @Transactional
@@ -55,7 +54,7 @@ public class UserService {
 
     @Transactional
     public void updateUser(UserUpdateRequest userUpdateRequest) {
-        Optional<User> optionalUser = userRepository.findById(userUpdateRequest.getId());
+        Optional<User> optionalUser = userRepository.findByEmail(userUpdateRequest.getEmail());
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.setName(userUpdateRequest.getName());
