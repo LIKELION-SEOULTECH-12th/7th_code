@@ -1,16 +1,13 @@
 package com.instagram.insta.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.instagram.insta.dto.post.request.PostCreateRequest;
 import com.instagram.insta.dto.post.response.PostResponse;
 import com.instagram.insta.service.PostService;
 import lombok.AllArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RequestMapping("/insta")
@@ -30,10 +27,22 @@ public class PostController {
 //        postService.savePost(postCreateRequest);
 //    }
     @PostMapping("/upload")
-    public PostResponse createPost(PostCreateRequest createRequest) throws IOException {
-        System.out.println("controller run");
+    public PostResponse createPost(
+            @RequestParam("image") MultipartFile image,
+            @RequestParam("context") String context,
+            @RequestParam("userId") Long userId) throws IOException {
+        System.out.println("Received User ID: " + userId); // 로그 추가
+        PostCreateRequest createRequest = new PostCreateRequest();
+        createRequest.setImage(image);
+        createRequest.setContext(context);
+        createRequest.setUserId(userId);
         return postService.createPost(createRequest);
     }
+//    public PostResponse createPost(PostCreateRequest createRequest) throws IOException {
+//        System.out.println("controller run");
+//        System.out.println("Received User Id: " + createRequest.getUserId());
+//        return postService.createPost(createRequest);
+//    }
 
     // 전체 피드 조회
     @GetMapping("/{userId}")

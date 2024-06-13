@@ -29,7 +29,7 @@ public class Post {
     private LocalDateTime uploadTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="USER_ID")
+    @JoinColumn(name="USERID")
     private User user;
 
     public Post(String context, byte[] image, LocalDateTime uploadTime, User user) {
